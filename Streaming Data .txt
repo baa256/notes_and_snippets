@@ -1,0 +1,73 @@
+Data quality: Accuracy
+Completeness 
+Consistency(Reliability,Integrity) 
+Relevance  
+Timeliness( how up to date )
+
+
+Streaming Concepts:
+
+Data Stream - defined by flow of data, not the content 
+ex logs - system event logs - components :
+                listener: accepts messages
+                parser = understands how to read messages 
+                logic = decides what to do 
+                writer : stores the messages for later 
+                
+Queues behave like batches with a batch size or one 
+Queues store / process data in order or insertion 
+
+Batch processes handle data in groups or batches 
+
+Streams handle data without pausing along the way
+        don't have a defined end 
+        
+        
+ Which to use ? 
+ If we can process in groups , batching often best due to simplicity 
+ If we need order, but it's ok to pause, use a queue
+ If we need continuous data, or we don't know how much data, try streaming
+ 
+ 
+ requirements:
+     speed of transport
+     processing latency 
+     delivery 
+     data storage 
+     cost 
+     
+Why scale ?
+same data in less time
+more data in same time
+SLA 
+Reduce latency 
+Deliver quicker 
+
+
+Vertically Scaling Streaming Systems:
+        faster cpu/gpu
+        
+Streaming processes don't stop until complete
+Different items can be in different parts of the pipeline,
+but total processing capacity is limited by the system performance 
+Benchmark and test
+
+Potential Problems 
+
+    missing messages - sometimes handled with sequence identifier 
+    delayed -  often related to system issues 
+    out of order - requires measure of sequence or state to detect 
+    repeat - sequence handling to avoid
+    
+Common systems :
+    Celery - distributed task queue / FIFO 
+    Kafka - distributed event streaming system - producers and consumers ,   topics 
+        best for passing data between multiple systems 
+        single source of truth 
+        data backups
+        data system migrations 
+
+    Spark Streaming 
+        useful for processing large amounts of data and in ML scenarios
+        able to transition from batch to stream processing fairly easily
+        Not designed to store or modify events, but primarily to process or modify the data 
